@@ -1,0 +1,14 @@
+{
+  "name": "keep-me-in-the-loop",
+  "owner": {
+    "name": "Keep Me in the Loop contributors"
+  },
+  "description": "A lightweight keep-the-human-in-the-loop skill for Claude Code.",
+  "plugins": [
+    {
+      "name": "keep-me-in-the-loop",
+      "source": ".",
+      "description": "Log consequential choices and wait for the human before implementation."
+    }
+  ]
+}

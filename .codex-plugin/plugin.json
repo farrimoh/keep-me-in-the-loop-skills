@@ -1,0 +1,30 @@
+{
+  "name": "keep-me-in-the-loop",
+  "version": "2.0.0",
+  "description": "Lightweight human decision logging for consequential agent-assisted changes.",
+  "author": {
+    "name": "Keep Me in the Loop contributors"
+  },
+  "license": "Apache-2.0",
+  "keywords": [
+    "human-in-the-loop",
+    "decisions",
+    "decision-log",
+    "review-boundary"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Keep Me in the Loop",
+    "shortDescription": "Human decisions before consequential implementation",
+    "longDescription": "Identify areas where human judgment matters, log concise proposals, wait for an explicit decision, and implement only the accepted scope.",
+    "developerName": "Keep Me in the Loop contributors",
+    "category": "Productivity",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "defaultPrompt": [
+      "Keep me in the loop for consequential changes in this project."
+    ]
+  }
+}

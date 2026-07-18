@@ -1,0 +1,17 @@
+{
+  "name": "keep-me-in-the-loop",
+  "displayName": "Keep Me in the Loop",
+  "version": "2.0.0",
+  "description": "Lightweight human decision logging for consequential agent-assisted changes.",
+  "author": {
+    "name": "Keep Me in the Loop contributors"
+  },
+  "license": "Apache-2.0",
+  "keywords": [
+    "human-in-the-loop",
+    "decisions",
+    "decision-log",
+    "review-boundary"
+  ],
+  "skills": "./skills/"
+}

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Keep Me in the Loop"
+  short_description: "Pause for human decisions in consequential areas"
+  default_prompt: "Use $keep-me-in-the-loop to set up or apply project decision boundaries and wait for my explicit acceptance before consequential implementation."
