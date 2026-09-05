@@ -1,0 +1,20 @@
+{
+  "name": "keep-me-in-the-loop",
+  "interface": {
+    "displayName": "Keep Me in the Loop"
+  },
+  "plugins": [
+    {
+      "name": "keep-me-in-the-loop",
+      "source": {
+        "source": "local",
+        "path": "./"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}

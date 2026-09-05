@@ -1,8 +1,8 @@
 # Decision Levels
 
-Use these levels as a lightweight guide. Project-defined areas in `KEEP_ME_IN_THE_LOOP.md` take precedence.
+Use these levels to assess impact and propose boundaries during adoption. During operation, the accepted areas in `KEEP_ME_IN_THE_LOOP.md` determine which changes require a decision; these levels do not add approval requirements on their own.
 
-| Level | Meaning | Default action |
+| Level | Meaning | Guidance when defining boundaries |
 | --- | --- | --- |
 | 0 | Observation | Proceed |
 | 1 | Routine, reversible implementation | Proceed and summarize |

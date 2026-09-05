@@ -7,7 +7,7 @@
   "plugins": [
     {
       "name": "keep-me-in-the-loop",
-      "source": ".",
+      "source": "./",
       "description": "Log consequential choices and wait for the human before implementation."
     }
   ]

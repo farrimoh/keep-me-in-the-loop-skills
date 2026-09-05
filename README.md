@@ -1,122 +1,115 @@
 # Keep Me in the Loop
 
-A lightweight Agent Skill that sets up and applies project-specific human decision boundaries. Routine work proceeds while the human stays in control of consequential choices.
+**Keep routine work moving. Keep consequential decisions yours.**
 
-The skill works with Claude Code, Codex, Hermes Agent, and other clients that implement the [Agent Skills specification](https://agentskills.io/specification).
+A lightweight [Agent Skill](https://agentskills.io/specification) for agreeing on when a coding agent should pause, explain a choice, and wait for your decision. Packaged for Codex and Claude Code, with a portable skill directory for Hermes Agent and other compatible clients.
 
-## What it does
+[Install](#install) · [Get started](#get-started) · [How it works](#how-it-works) · [Resources](#resources)
 
-```text
-Inspect → notice a boundary → log the choice → ask the human
-                                              ↓
-                              implement only after acceptance
-                                              ↓
-                                    record and verify the result
-```
+## Why use it?
 
-The skill has two modes:
+You might want an agent to fix tests and refactor freely, but ask before changing a public API, deleting data, or altering a scientific model. This skill turns those preferences into explicit project boundaries and a concise decision log.
 
-- **Adoption:** propose the project's activation rule and decision boundaries, then wait before writing them.
-- **Operation:** apply accepted boundaries to ongoing work.
+You choose the boundaries. The agent records the evidence, options, and recommendation when work reaches one, then implements the scope you accept.
 
-Projects identify specific areas where human judgment is required. Typical examples are architecture, public behavior, destructive operations, security, scientific meaning, domain assumptions, and difficult-to-reverse changes.
+## Install
 
-When work touches one of those areas, the agent:
+Choose the route for your agent. Installation makes the skill available; project adoption is a separate step.
 
-1. Writes a short proposal in `KEEP_ME_IN_THE_LOOP.md`.
-2. Shows the decision to the human.
-3. Waits for an explicit `accepted`, `rejected`, or `deferred` decision.
-4. Implements only the accepted scope.
-5. Records the implementation and verification result.
+### Codex
 
-Routine implementation work proceeds normally and is summarized without filling the decision log.
-
-## What it does not do
-
-- No project memory system
-- No session logs or handoffs
-- No hooks or enforcement engine
-- No authorization database
-- No agent orchestration
-- No logging of every command or edit
-
-This is a collaboration protocol, not a security boundary.
-
-## Project adoption
-
-After installing, ask your agent:
-
-```text
-Use keep-me-in-the-loop to adopt the protocol in this project.
-```
-
-The skill inspects existing project instructions and proposes a merge for review. It never silently overwrites `AGENTS.md`, `CLAUDE.md`, or an existing policy.
-
-An adopted project uses:
-
-- `AGENTS.md` to activate the installed skill for Codex, Hermes, and compatible agents;
-- `CLAUDE.md` to import the activation rule when Claude Code support is needed; and
-- `KEEP_ME_IN_THE_LOOP.md` to define the accepted decision boundaries and hold concise decision entries.
-
-The proposed policy starts with this shape:
-
-```markdown
-# Keep Me in the Loop
-
-## Areas requiring a decision
-
-- Changes to public behavior
-- Destructive or difficult-to-reverse operations
-
-## Decision log
-```
-
-The project decides which areas belong in the list. Decision entries remain concise and keep proposal, human decision, implementation, and verification distinct.
-
-## Install with Claude Code
-
-Test from a clone:
+Run in your terminal:
 
 ```bash
-claude --plugin-dir .
+codex plugin marketplace add farrimoh/keep-me-in-the-loop-skills
+codex plugin add keep-me-in-the-loop@keep-me-in-the-loop
 ```
 
-After hosting the repository:
+Start a new session, then use the prompt below. See the [official plugin documentation](https://developers.openai.com/plugins/build/plugins) for marketplace setup and desktop installation options.
+
+### Claude Code
+
+Run inside Claude Code:
 
 ```text
-/plugin marketplace add OWNER/REPOSITORY
+/plugin marketplace add farrimoh/keep-me-in-the-loop-skills
 /plugin install keep-me-in-the-loop@keep-me-in-the-loop
 ```
 
-## Install with Codex
+You can also try the plugin from a local clone by running `claude --plugin-dir .` at the repository root. See the [Claude Code plugin documentation](https://code.claude.com/docs/en/plugins).
 
-Add the repository as a plugin marketplace:
+### Hermes Agent
 
-```bash
-codex plugin marketplace add OWNER/REPOSITORY
-```
-
-Open `/plugins` in Codex, select the marketplace, and install **Keep Me in the Loop**. Start a new session before using the installed skill.
-
-## Install with Hermes Agent
-
-The repository is a Hermes-compatible skill tap:
+Run in your terminal:
 
 ```bash
-hermes skills tap add OWNER/REPOSITORY
-hermes skills install OWNER/REPOSITORY/keep-me-in-the-loop
+hermes skills tap add farrimoh/keep-me-in-the-loop-skills
+hermes skills install farrimoh/keep-me-in-the-loop-skills/keep-me-in-the-loop
 ```
 
-## Other Agent Skills clients
+See the [Hermes skills documentation](https://hermes-agent.nousresearch.com/docs/user-guide/features/skills) for taps and skill installation.
 
-Install the `skills/keep-me-in-the-loop` directory using the client's native skill installer or place it in that client's documented skills directory.
+### Other compatible clients
 
-## Project instructions
+Install the complete [skills/keep-me-in-the-loop](skills/keep-me-in-the-loop) directory with your client's native skill installer. Keep its `assets/` and `references/` folders alongside `SKILL.md`.
 
-The installed skill includes a concise `AGENTS.md` activation template. During adoption, the agent adapts and merges that template only after explicit human acceptance. Installing the skill by itself does not modify any project.
+## Get started
 
-## Scientific example
+Open the project you want to use it in and ask your agent:
 
-The same lightweight pattern can identify scientific-model changes as decision areas while allowing ordinary logging, parsing, and invariant-preserving refactoring to proceed. The installed skill includes a neutral scientific example under `references/` and reads it only for scientific or model-significant work.
+```text
+Use keep-me-in-the-loop to adopt the protocol in this project.
+Propose boundaries for changes to public behavior and destructive operations.
+```
 
-Licensed under the [Apache License 2.0](LICENSE).
+The agent inspects existing instructions and shows you the proposed policy and exact instruction changes. After you accept, it merges them into the project:
+
+| File | Purpose |
+| --- | --- |
+| `AGENTS.md` | Activates the installed skill and its decision rules. |
+| `CLAUDE.md` | Imports the activation rule when Claude Code support is needed. |
+| `KEEP_ME_IN_THE_LOOP.md` | Defines your accepted boundaries and records decisions. |
+
+Existing instructions are preserved. You review the proposed boundaries before any adoption files are written.
+
+For ongoing work, ask normally or say:
+
+```text
+Apply keep-me-in-the-loop while implementing this change.
+```
+
+## How it works
+
+1. **Inspect.** Read the project policy and relevant evidence.
+2. **Classify.** Continue routine work; identify changes that touch an agreed boundary.
+3. **Propose.** Log the choice, alternatives, recommendation, risks, and verification plan.
+4. **Decide.** Wait for your explicit acceptance, rejection, or deferral.
+5. **Implement and verify.** Apply only the accepted scope and record the result.
+
+For example, if public API changes require a decision, renaming an internal helper may proceed normally. Removing a public endpoint requires a proposal and your acceptance first.
+
+Each entry keeps the proposal, human response, implementation, and verification distinct. Routine edits and commands stay out of the log.
+
+This is an instruction-based collaboration protocol. It has no hooks or enforcement engine and does not provide a security boundary. It adds no runtime dependencies, session logs, or project memory system.
+
+## Resources
+
+| Resource | Purpose |
+| --- | --- |
+| [Skill instructions](skills/keep-me-in-the-loop/SKILL.md) | Adoption and operation workflows. |
+| [Activation template](skills/keep-me-in-the-loop/assets/AGENTS.md) | Instructions to merge into a project's `AGENTS.md`. |
+| [Policy template](skills/keep-me-in-the-loop/assets/KEEP_ME_IN_THE_LOOP.md) | Project boundaries and a decision entry template. |
+| [Decision levels](skills/keep-me-in-the-loop/references/decision-levels.md) | Guidance for classifying impact. |
+| [Scientific example](skills/keep-me-in-the-loop/references/scientific-workflow-example.md) | Example boundaries for model changes and scientific claims. |
+
+Plugin metadata lives in `.codex-plugin/` and `.claude-plugin/`. The native Codex marketplace is in `.agents/plugins/`; the Claude marketplace is in `.claude-plugin/marketplace.json`.
+
+## Contributing
+
+Keep changes focused and examples portable. Use repository-relative paths or clear placeholders, and keep shared plugin metadata consistent across both manifests.
+
+Before submitting, check JSON syntax, relative Markdown links, and whitespace with `git diff --check`. If Claude Code is installed, run `claude plugin validate .` from the repository root. For workflow changes, describe a realistic example and the expected agent behavior in your pull request.
+
+## License
+
+[Apache License 2.0](LICENSE).
